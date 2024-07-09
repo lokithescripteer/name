@@ -46,13 +46,17 @@ local function highlightPlayer(player)
     end
 end
 
--- Highlight all players currently in the game
+-- Function to highlight all players currently in the game
 local function highlightAllPlayers()
     for _, player in ipairs(game.Players:GetPlayers()) do
         highlightPlayer(player)
     end
 end
 
--- Run the highlighting function for existing players and listen for new ones
+-- Run the initial highlighting function for existing players
 highlightAllPlayers()
-game.Players.PlayerAdded:Connect(highlightPlayer)
+
+-- Listen for new players joining
+game.Players.PlayerAdded:Connect(function(player)
+    highlightPlayer(player)
+end)
